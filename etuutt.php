@@ -50,7 +50,7 @@ class EtuuttStaffAuthBackend extends ExternalStaffAuthenticationBackend {
             ) {
                 if (!$staff instanceof StaffSession) {
                     // osTicket <= v1.9.7 or so
-                    $staff = new StaffSession($user->getId());
+                    $staff = new StaffSession($staff->getId());
                 }
                 return $staff;
             }
