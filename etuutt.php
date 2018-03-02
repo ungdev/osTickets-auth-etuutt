@@ -74,7 +74,7 @@ class EtuuttStaffAuthBackend extends ExternalStaffAuthenticationBackend {
 
     function triggerAuth() {
         parent::triggerAuth();
-        $etuutt = $this->google->triggerAuth();
+        $etuutt = $this->etuutt->triggerAuth();
         $etuutt->GET(
             "https://etu.utt.fr/api/public/user/account?access_token="
             . $this->etuutt->access_token)
