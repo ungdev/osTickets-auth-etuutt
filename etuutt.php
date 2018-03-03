@@ -55,13 +55,26 @@ class EtuuttStaffAuthBackend extends ExternalStaffAuthenticationBackend {
                 return $staff;
             }
             elseif (isset($_SESSION[':oauth']['profile'])) {
-                // TODO: Prepare ClientCreateRequest
-                $profile = $_SESSION[':oauth']['profile'];
-                $info = array(
-                    'email' => $_SESSION[':oauth']['email'],
-                    'name' => $profile['fullName'],
-                );
-                return new ClientCreateRequest($this, $info['email'], $info);
+                $errors = array();
+                $staff = array();
+                $staff['username'] = $_SESSION[':oauth']['profile']['login'];
+                $staff['firstname'] = $_SESSION[':oauth']['profile']['firstName'];
+                $staff['lastname'] = $_SESSION[':oauth']['profile']['lastName'];
+                $staff['email'] = $_SESSION[':oauth']['profile']['email'];
+                $staff['isadmin'] = 0;
+                $staff['isactive'] = 0;
+                $staff['group_id'] = 1;
+                $staff['dept_id'] = 1;
+                $staff['welcome_email'] = "on";
+                $staff['timezone_id'] = 8;
+                $staff['isvisible'] = 1;
+                Staff::create($staff, $errors);
+                if (($user = StaffSession::lookup(array('email' => $_SESSION[':oauth']['email']))) && $user->getId()) {
+                    if (!$user instanceof StaffSession) {
+                        // osTicket <= v1.9.7 or so
+                        $user = new StaffSession($user->getId());
+                    }
+                    return $user;
             }
         }
     }
