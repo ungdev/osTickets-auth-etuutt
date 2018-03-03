@@ -42,7 +42,8 @@ class EtuuttStaffAuthBackend extends ExternalStaffAuthenticationBackend {
         $this->etuutt = new EtuuttAuth($config);
     }
 
-    function signOn() {
+    function signOn()
+    {
         // TODO: Check session for auth token
         if (isset($_SESSION[':oauth']['email'])) {
             if (($staff = StaffSession::lookup(array('email' => $_SESSION[':oauth']['email'])))
@@ -53,8 +54,7 @@ class EtuuttStaffAuthBackend extends ExternalStaffAuthenticationBackend {
                     $staff = new StaffSession($staff->getId());
                 }
                 return $staff;
-            }
-            elseif (isset($_SESSION[':oauth']['profile'])) {
+            } elseif (isset($_SESSION[':oauth']['profile'])) {
                 $errors = array();
                 $staff = array();
                 $staff['username'] = $_SESSION[':oauth']['profile']['login'];
@@ -75,6 +75,7 @@ class EtuuttStaffAuthBackend extends ExternalStaffAuthenticationBackend {
                         $user = new StaffSession($user->getId());
                     }
                     return $user;
+                }
             }
         }
     }
