@@ -55,7 +55,6 @@ class EtuuttStaffAuthBackend extends ExternalStaffAuthenticationBackend {
                 }
                 return $staff;
             } elseif (isset($_SESSION[':oauth']['profile'])) {
-                $errors = array();
                 $staff = array();
                 $staff['username'] = $_SESSION[':oauth']['profile']['login'];
                 $staff['firstname'] = $_SESSION[':oauth']['profile']['firstName'];
@@ -70,13 +69,8 @@ class EtuuttStaffAuthBackend extends ExternalStaffAuthenticationBackend {
                 $r_staff = Staff::create($staff);
                 if(!$r_staff->save())
                     die('Error during creation');
-                if (($user = StaffSession::lookup(array('email' => $_SESSION[':oauth']['email']))) && $user->getId()) {
-                    if (!$user instanceof StaffSession) {
-                        // osTicket <= v1.9.7 or so
-                        $user = new StaffSession($user->getId());
-                    }
-                    return $user;
-                }
+                $_SESSION['_staff']['auth']['msg'] = 'Compte crée !';
+                return;
             }
         }
     }
