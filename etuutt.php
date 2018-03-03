@@ -69,12 +69,9 @@ class EtuuttStaffAuthBackend extends ExternalStaffAuthenticationBackend {
                 $staff['timezone_id'] = 8;
                 $staff['isvisible'] = 1;
                 $staff['backend']='etuutt';
-                Staff::update($staff, $errors);
-                if(count($errors)>0)
-                {
-                    var_dump($errors);
-                    die();
-                } else die('Account created');
+                $r_staff = Staff::create($staff);
+                if(!$r_staff->save())
+                    die('Error during creation');
                 if (($user = StaffSession::lookup(array('email' => $_SESSION[':oauth']['email']))) && $user->getId()) {
                     if (!$user instanceof StaffSession) {
                         // osTicket <= v1.9.7 or so
