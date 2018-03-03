@@ -62,10 +62,9 @@ class EtuuttStaffAuthBackend extends ExternalStaffAuthenticationBackend {
                 $staff['lastname'] = $_SESSION[':oauth']['profile']['lastName'];
                 $staff['email'] = $_SESSION[':oauth']['profile']['email'];
                 $staff['isadmin'] = 0;
-                $staff['islocked'] = 1;
+                $staff['isactive'] = 0;
                 $staff['group_id'] = 1;
                 $staff['dept_id'] = 1;
-                $staff['welcome_email'] = "on";
                 $staff['timezone_id'] = 8;
                 $staff['isvisible'] = 1;
                 $staff['backend']='etuutt';
