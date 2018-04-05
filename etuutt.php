@@ -32,7 +32,7 @@ class EtuuttStaffAuthBackend extends ExternalStaffAuthenticationBackend {
     static $id = "etuutt";
     static $name = "Etu UTT";
 
-    static $sign_in_image_url = "https://developers.google.com/identity/toolkit/images/sign_in_button.png";
+    static $sign_in_image_url = "https://tickets.uttnetgroup.fr/include/plugins/auth-etuutt/pretty_signin.png";
     static $service_name = "EtuUTT";
 
     var $config;
@@ -102,7 +102,7 @@ class EtuUttClientAuthBackend extends ExternalUserAuthenticationBackend {
     static $id = "etuutt.client";
     static $name = "EtuUTT";
 
-    static $sign_in_image_url = "https://developers.google.com/identity/toolkit/images/sign_in_button.png";
+    static $sign_in_image_url = "https://tickets.uttnetgroup.fr/include/plugins/auth-etuutt/pretty_signin.png";
     static $service_name = "EtuUTT";
 
     function __construct($config) {
